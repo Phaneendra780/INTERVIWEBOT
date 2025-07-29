@@ -28,6 +28,426 @@ st.set_page_config(
     page_icon="🎯"
 )
 
+# Custom CSS for white theme with perfect contrast
+st.markdown("""
+<style>
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Root variables */
+    :root {
+        --primary-white: #FFFFFF;
+        --secondary-white: #FAFAFA;
+        --light-gray: #F5F5F5;
+        --medium-gray: #E8E8E8;
+        --dark-gray: #333333;
+        --text-primary: #1A1A1A;
+        --text-secondary: #4A4A4A;
+        --accent-blue: #2E5BFF;
+        --accent-green: #00B341;
+        --accent-orange: #FF6B35;
+        --border-color: #D1D1D1;
+        --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Main app styling */
+    .stApp {
+        background-color: var(--primary-white);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Custom header styling */
+    .main-header {
+        background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%);
+        padding: 2rem 0;
+        border-bottom: 2px solid var(--medium-gray);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .main-header h1 {
+        color: var(--text-primary) !important;
+        font-weight: 700 !important;
+        font-size: 3rem !important;
+        margin-bottom: 0.5rem !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-header .subtitle {
+        color: var(--text-secondary) !important;
+        font-size: 1.2rem !important;
+        font-weight: 400 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Title styling */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-primary) !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Main title */
+    .stApp > div > div > div > div > h1 {
+        color: var(--text-primary) !important;
+        font-size: 2.5rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.5rem !important;
+        border-bottom: 3px solid var(--accent-blue);
+        padding-bottom: 1rem;
+    }
+    
+    /* Subtitle */
+    .stApp > div > div > div > div > div[data-testid="stMarkdownContainer"] h2 {
+        color: var(--text-secondary) !important;
+        font-size: 1.3rem !important;
+        font-weight: 500 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Text content */
+    p, div, span, li {
+        color: var(--text-primary) !important;
+        line-height: 1.6 !important;
+    }
+    
+    /* Card-like containers */
+    .stContainer > div {
+        background-color: var(--primary-white);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-light);
+    }
+    
+    /* Info boxes */
+    .stInfo {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--accent-blue) !important;
+        border-left: 4px solid var(--accent-blue) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-light) !important;
+    }
+    
+    .stInfo > div {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Success boxes */
+    .stSuccess {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--accent-green) !important;
+        border-left: 4px solid var(--accent-green) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-light) !important;
+    }
+    
+    .stSuccess > div {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Error boxes */
+    .stError {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--accent-orange) !important;
+        border-left: 4px solid var(--accent-orange) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-light) !important;
+    }
+    
+    .stError > div {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        background-color: var(--accent-blue) !important;
+        color: var(--primary-white) !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 2rem !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        transition: all 0.3s ease !important;
+        box-shadow: var(--shadow-light) !important;
+        text-transform: none !important;
+        letter-spacing: 0.5px !important;
+    }
+    
+    .stButton > button:hover {
+        background-color: #1E4BFF !important;
+        box-shadow: var(--shadow-medium) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .stButton > button:disabled {
+        background-color: var(--medium-gray) !important;
+        color: var(--text-secondary) !important;
+        cursor: not-allowed !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Secondary buttons */
+    .stButton > button[kind="secondary"] {
+        background-color: var(--primary-white) !important;
+        color: var(--accent-blue) !important;
+        border: 2px solid var(--accent-blue) !important;
+    }
+    
+    .stButton > button[kind="secondary"]:hover {
+        background-color: var(--accent-blue) !important;
+        color: var(--primary-white) !important;
+    }
+    
+    /* Input fields */
+    .stTextInput > div > div > input {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+        padding: 0.75rem !important;
+        font-size: 1rem !important;
+        transition: border-color 0.3s ease !important;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: var(--accent-blue) !important;
+        box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1) !important;
+    }
+    
+    /* Text areas */
+    .stTextArea > div > div > textarea {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        transition: border-color 0.3s ease !important;
+    }
+    
+    .stTextArea > div > div > textarea:focus {
+        border-color: var(--accent-blue) !important;
+        box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1) !important;
+    }
+    
+    /* Select boxes */
+    .stSelectbox > div > div {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: 8px !important;
+    }
+    
+    .stSelectbox > div > div > div {
+        color: var(--text-primary) !important;
+        padding: 0.75rem !important;
+    }
+    
+    /* File uploader */
+    .stFileUploader > div {
+        background-color: var(--secondary-white) !important;
+        border: 2px dashed var(--border-color) !important;
+        border-radius: 12px !important;
+        padding: 2rem !important;
+        text-align: center !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stFileUploader > div:hover {
+        border-color: var(--accent-blue) !important;
+        background-color: var(--light-gray) !important;
+    }
+    
+    .stFileUploader > div > div {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div > div {
+        background-color: var(--accent-blue) !important;
+        border-radius: 10px !important;
+    }
+    
+    .stProgress > div > div {
+        background-color: var(--light-gray) !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Expanders */
+    .streamlit-expanderHeader {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px 8px 0 0 !important;
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        padding: 1rem !important;
+    }
+    
+    .streamlit-expanderContent {
+        background-color: var(--primary-white) !important;
+        border: 1px solid var(--border-color) !important;
+        border-top: none !important;
+        border-radius: 0 0 8px 8px !important;
+        padding: 1.5rem !important;
+    }
+    
+    /* Columns */
+    .stColumn {
+        background-color: var(--primary-white);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 0.5rem;
+        box-shadow: var(--shadow-light);
+        border: 1px solid var(--medium-gray);
+    }
+    
+    /* Spinner */
+    .stSpinner > div {
+        border-top-color: var(--accent-blue) !important;
+    }
+    
+    /* Labels */
+    .stTextInput > label,
+    .stTextArea > label,
+    .stSelectbox > label,
+    .stFileUploader > label {
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        text-align: center !important;
+        box-shadow: var(--shadow-light) !important;
+    }
+    
+    .stMetric > div {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Custom section headers */
+    .section-header {
+        background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+        margin: 2rem 0 1rem 0 !important;
+        text-align: center;
+    }
+    
+    /* Stage indicators */
+    .stage-indicator {
+        background: linear-gradient(135deg, var(--secondary-white) 0%, var(--light-gray) 100%);
+        border: 2px solid var(--accent-blue);
+        border-radius: 50px;
+        padding: 0.5rem 1.5rem;
+        color: var(--accent-blue) !important;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+    
+    /* Conversation history styling */
+    .conversation-entry {
+        background-color: var(--secondary-white);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-light);
+    }
+    
+    /* Custom balloons effect */
+    .celebration {
+        background: linear-gradient(45deg, var(--accent-blue), var(--accent-green), var(--accent-orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3rem;
+        text-align: center;
+        margin: 2rem 0;
+        animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+    
+    /* Help text */
+    .help-text {
+        color: var(--text-secondary) !important;
+        font-size: 0.9rem !important;
+        font-style: italic !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    /* Enhanced accessibility */
+    *:focus {
+        outline: 3px solid var(--accent-blue) !important;
+        outline-offset: 2px !important;
+    }
+    
+    /* High contrast text */
+    strong, b {
+        color: var(--text-primary) !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Custom dividers */
+    hr {
+        border: none !important;
+        height: 2px !important;
+        background: linear-gradient(90deg, transparent, var(--border-color), transparent) !important;
+        margin: 2rem 0 !important;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .main-header .subtitle {
+            font-size: 1rem !important;
+        }
+        
+        .stColumn {
+            margin: 0.25rem;
+            padding: 0.75rem;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # API Keys
 TAVILY_API_KEY = st.secrets.get("TAVILY_API_KEY")
 GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY")
@@ -342,13 +762,18 @@ def main():
     if 'current_feedback' not in st.session_state:
         st.session_state.current_feedback = ""
 
-    # Header
-    st.title("🎯 InterviewAI - Smart Interview Preparation")
-    st.subheader("AI-Powered Mock Interviews with Real Company Questions")
+    # Custom Header
+    st.markdown("""
+    <div class="main-header">
+        <h1>🎯 InterviewAI</h1>
+        <div class="subtitle">Smart Interview Preparation with AI-Powered Mock Interviews</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Stage 1: Job Selection
     if st.session_state.stage == 'job_selection':
-        st.header("🎯 Select Your Target Job")
+        st.markdown('<div class="stage-indicator">Step 1 of 5: Job Selection</div>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header">🎯 Select Your Target Job</h2>', unsafe_allow_html=True)
         
         col1, col2 = st.columns([1, 1])
         
@@ -399,7 +824,8 @@ def main():
 
     # Stage 2: Resume Upload and Analysis
     elif st.session_state.stage == 'resume_upload':
-        st.header("📄 Upload Your Resume")
+        st.markdown('<div class="stage-indicator">Step 2 of 5: Resume Upload & Analysis</div>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header">📄 Upload Your Resume</h2>', unsafe_allow_html=True)
         
         # Display selected job info
         st.info(f"**Target Position:** {st.session_state.selected_job} at {st.session_state.company_name}")
@@ -453,7 +879,8 @@ def main():
 
     # Stage 3: Preparation Complete - Show Analysis
     elif st.session_state.stage == 'preparation_complete':
-        st.header("📊 Preparation Analysis Complete")
+        st.markdown('<div class="stage-indicator">Step 3 of 5: Preparation Analysis</div>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header">📊 Preparation Analysis Complete</h2>', unsafe_allow_html=True)
         
         col1, col2 = st.columns([1, 1])
         
@@ -467,7 +894,7 @@ def main():
             with st.expander("View Company Interview Intelligence", expanded=True):
                 st.write(st.session_state.interview_questions)
         
-        st.header("🎤 Ready to Start Mock Interview")
+        st.markdown('<h2 class="section-header">🎤 Ready to Start Mock Interview</h2>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
@@ -477,7 +904,8 @@ def main():
 
     # Stage 4: Interview Conduct
     elif st.session_state.stage == 'interview':
-        st.header(f"🎤 Mock Interview: {st.session_state.selected_job} at {st.session_state.company_name}")
+        st.markdown('<div class="stage-indicator">Step 4 of 5: Mock Interview Session</div>', unsafe_allow_html=True)
+        st.markdown(f'<h2 class="section-header">🎤 Mock Interview: {st.session_state.selected_job} at {st.session_state.company_name}</h2>', unsafe_allow_html=True)
         
         # Progress indicator
         progress = min(st.session_state.current_question_num / 10, 1.0)
@@ -579,10 +1007,11 @@ def main():
 
     # Stage 5: Interview Complete
     elif st.session_state.stage == 'interview_complete':
-        st.header("🎉 Interview Complete!")
+        st.markdown('<div class="stage-indicator">Step 5 of 5: Interview Complete</div>', unsafe_allow_html=True)
+        st.markdown('<div class="celebration">🎉 Interview Complete! 🎉</div>', unsafe_allow_html=True)
         st.balloons()
         
-        st.subheader("📊 Interview Summary")
+        st.markdown('<h2 class="section-header">📊 Interview Summary</h2>', unsafe_allow_html=True)
         
         # Display all Q&A with feedback
         for entry in st.session_state.conversation_history:
