@@ -64,13 +64,14 @@ st.markdown("""
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
+     footer {visibility: hidden;}
    
       
     
     
     /* Custom header styling */
     .main-header {
-        background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%);
+        
         padding: 2rem 0;
         border-bottom: 2px solid var(--border-color);
         margin-bottom: 2rem;
