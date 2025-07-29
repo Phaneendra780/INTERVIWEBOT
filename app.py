@@ -40,7 +40,7 @@ st.markdown("""
         --secondary-white: #FAFAFA;
         --light-gray: #F5F5F5;
         --medium-gray: #E0E0E0;
-        --dark-gray: #FFFFFF;
+        --primary-white: #FFFFFF;
         --text-primary: #1A1A1A;
         --text-secondary: #404040;
         --text-light: #666666;
