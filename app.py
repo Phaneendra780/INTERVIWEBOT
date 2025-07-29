@@ -314,7 +314,7 @@ st.markdown("""
     }
     
     .stSelectbox li:hover {
-        background-color: var(--light-gray) !important;
+        
         color: var(--text-primary) !important;
     }
     
