@@ -57,7 +57,7 @@ st.markdown("""
     
     /* Main app styling */
     .stApp {
-        
+        background-color: var(--primary-white);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         color: var(--text-primary);
     }
@@ -187,7 +187,7 @@ st.markdown("""
     }
     
     .stError div[data-testid="stMarkdownContainer"] p {
-        color: var(--text-primary) !important;
+        
         font-weight: 500 !important;
     }
     
