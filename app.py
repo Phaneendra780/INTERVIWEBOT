@@ -71,7 +71,7 @@ st.markdown("""
     
     /* Custom header styling */
     .main-header {
-        
+        background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%)
         padding: 2rem 0;
         border-bottom: 2px solid var(--border-color);
         margin-bottom: 2rem;
@@ -149,7 +149,7 @@ st.markdown("""
     }
     
     .stInfo div[data-testid="stMarkdownContainer"] p {
-        color: var(--text-primary) !important;
+        
         font-weight: 500 !important;
     }
     
