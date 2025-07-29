@@ -64,7 +64,8 @@ st.markdown("""
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+   
+      
     
     
     /* Custom header styling */
