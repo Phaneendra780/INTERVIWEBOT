@@ -335,6 +335,12 @@ def main():
         st.session_state.conversation_history = []
     if 'current_question' not in st.session_state:
         st.session_state.current_question = None
+    if 'answer_submitted' not in st.session_state:
+        st.session_state.answer_submitted = False
+    if 'current_answer' not in st.session_state:
+        st.session_state.current_answer = ""
+    if 'current_feedback' not in st.session_state:
+        st.session_state.current_feedback = ""
 
     # Header
     st.title("🎯 InterviewAI - Smart Interview Preparation")
@@ -494,47 +500,71 @@ def main():
             st.subheader(f"Question {st.session_state.current_question_num}:")
             st.write(st.session_state.current_question)
             
-            # Answer input
-            answer = st.text_area(
-                "Your Answer:",
-                height=150,
-                placeholder="Type your answer here...",
-                key=f"answer_{st.session_state.current_question_num}"
-            )
+            # Show answer input only if answer hasn't been submitted
+            if not st.session_state.answer_submitted:
+                # Answer input
+                answer = st.text_area(
+                    "Your Answer:",
+                    height=150,
+                    placeholder="Type your answer here...",
+                    key=f"answer_{st.session_state.current_question_num}"
+                )
+                
+                col1, col2, col3 = st.columns([1, 1, 1])
+                
+                with col2:
+                    if st.button("Submit Answer", use_container_width=True, disabled=not answer.strip()):
+                        # Evaluate answer
+                        feedback = evaluate_answer(
+                            st.session_state.current_question,
+                            answer,
+                            st.session_state.resume_analysis,
+                            st.session_state.selected_job
+                        )
+                        
+                        # Store the answer and feedback
+                        st.session_state.current_answer = answer
+                        st.session_state.current_feedback = feedback
+                        st.session_state.answer_submitted = True
+                        
+                        # Store conversation
+                        st.session_state.conversation_history.append({
+                            'question_num': st.session_state.current_question_num,
+                            'question': st.session_state.current_question,
+                            'answer': answer,
+                            'feedback': feedback
+                        })
+                        
+                        st.rerun()
             
-            col1, col2, col3 = st.columns([1, 1, 1])
-            
-            with col2:
-                if st.button("Submit Answer", use_container_width=True, disabled=not answer.strip()):
-                    # Evaluate answer
-                    feedback = evaluate_answer(
-                        st.session_state.current_question,
-                        answer,
-                        st.session_state.resume_analysis,
-                        st.session_state.selected_job
-                    )
-                    
-                    # Store conversation
-                    st.session_state.conversation_history.append({
-                        'question_num': st.session_state.current_question_num,
-                        'question': st.session_state.current_question,
-                        'answer': answer,
-                        'feedback': feedback
-                    })
-                    
-                    # Show feedback
-                    st.success("✅ Answer submitted!")
-                    with st.expander("📝 Feedback on Your Answer", expanded=True):
-                        st.write(feedback)
-                    
-                    # Move to next question
+            # Show feedback and next question button if answer has been submitted
+            if st.session_state.answer_submitted:
+                st.success("✅ Answer submitted!")
+                
+                # Display the submitted answer
+                st.subheader("Your Answer:")
+                st.write(st.session_state.current_answer)
+                
+                # Display feedback
+                with st.expander("📝 Feedback on Your Answer", expanded=True):
+                    st.write(st.session_state.current_feedback)
+                
+                # Navigation buttons
+                col1, col2, col3 = st.columns([1, 1, 1])
+                
+                with col2:
+                    # Move to next question or finish interview
                     if st.session_state.current_question_num < 10:
-                        if st.button("➡️ Next Question"):
+                        if st.button("➡️ Next Question", use_container_width=True):
+                            # Reset for next question
                             st.session_state.current_question_num += 1
                             st.session_state.current_question = None
+                            st.session_state.answer_submitted = False
+                            st.session_state.current_answer = ""
+                            st.session_state.current_feedback = ""
                             st.rerun()
                     else:
-                        if st.button("🏁 Finish Interview"):
+                        if st.button("🏁 Finish Interview", use_container_width=True):
                             st.session_state.stage = 'interview_complete'
                             st.rerun()
         
@@ -569,6 +599,9 @@ def main():
                 st.session_state.current_question_num = 1
                 st.session_state.conversation_history = []
                 st.session_state.current_question = None
+                st.session_state.answer_submitted = False
+                st.session_state.current_answer = ""
+                st.session_state.current_feedback = ""
                 st.rerun()
         
         with col2:
