@@ -40,7 +40,7 @@ st.markdown("""
         --secondary-white: #FAFAFA;
         --light-gray: #F5F5F5;
         --medium-gray: #E0E0E0;
-        --primary-white: #FFFFFF;
+        --dark-gray: #2C2C2C;
         --text-primary: #1A1A1A;
         --text-secondary: #404040;
         --text-light: #666666;
@@ -64,14 +64,12 @@ st.markdown("""
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
-     footer {visibility: hidden;}
-   
-      
-    
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
     
     /* Custom header styling */
     .main-header {
-        background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%)
+        background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%);
         padding: 2rem 0;
         border-bottom: 2px solid var(--border-color);
         margin-bottom: 2rem;
@@ -149,7 +147,7 @@ st.markdown("""
     }
     
     .stInfo div[data-testid="stMarkdownContainer"] p {
-        
+        color: var(--text-primary) !important;
         font-weight: 500 !important;
     }
     
@@ -187,7 +185,7 @@ st.markdown("""
     }
     
     .stError div[data-testid="stMarkdownContainer"] p {
-        
+        color: var(--text-primary) !important;
         font-weight: 500 !important;
     }
     
@@ -273,7 +271,7 @@ st.markdown("""
         opacity: 0.8 !important;
     }
     
-    /* Select boxes - MAJOR FIX for dropdown contrast */
+    /* Select boxes - COMPREHENSIVE FIX for dropdown contrast */
     .stSelectbox > div > div {
         background-color: var(--primary-white) !important;
         border: 2px solid var(--border-color-dark) !important;
@@ -287,14 +285,58 @@ st.markdown("""
         font-weight: 500 !important;
     }
     
-    /* Dropdown menu items - CRITICAL FIX */
+    /* Main selectbox container */
+    .stSelectbox div[data-baseweb="select"] {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+        border: 2px solid var(--border-color-dark) !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Selectbox input field */
     .stSelectbox div[data-baseweb="select"] > div {
         background-color: var(--primary-white) !important;
         color: var(--text-primary) !important;
-        border-color: var(--border-color-dark) !important;
+        border: none !important;
+        padding: 0.75rem !important;
     }
     
-    /* Dropdown options list */
+    /* Selectbox dropdown container - CRITICAL */
+    .stSelectbox div[data-baseweb="select"] div[role="listbox"] {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color-dark) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-medium) !important;
+        max-height: 200px !important;
+        overflow-y: auto !important;
+        z-index: 9999 !important;
+    }
+    
+    /* Dropdown options - MAIN FIX */
+    .stSelectbox div[data-baseweb="select"] div[role="option"] {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+        padding: 0.75rem 1rem !important;
+        font-weight: 500 !important;
+        border-bottom: 1px solid var(--light-gray) !important;
+        cursor: pointer !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Dropdown option hover state */
+    .stSelectbox div[data-baseweb="select"] div[role="option"]:hover {
+        background-color: var(--light-gray) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Selected dropdown option */
+    .stSelectbox div[data-baseweb="select"] div[role="option"][aria-selected="true"] {
+        background-color: var(--accent-blue) !important;
+        color: var(--primary-white) !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Alternative targeting for dropdown menu */
     .stSelectbox ul {
         background-color: var(--primary-white) !important;
         border: 2px solid var(--border-color-dark) !important;
@@ -314,7 +356,7 @@ st.markdown("""
     }
     
     .stSelectbox li:hover {
-        
+        background-color: var(--light-gray) !important;
         color: var(--text-primary) !important;
     }
     
@@ -322,16 +364,38 @@ st.markdown("""
         border-bottom: none !important;
     }
     
-    /* Selected option in dropdown */
-    .stSelectbox div[aria-selected="true"] {
-        background-color: var(--accent-blue) !important;
-        color: var(--primary-white) !important;
-        font-weight: 600 !important;
-    }
-    
     /* Dropdown arrow */
     .stSelectbox svg {
         fill: var(--text-primary) !important;
+    }
+    
+    /* Additional BaseWeb component targeting */
+    div[data-baseweb="popover"] {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color-dark) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-medium) !important;
+    }
+    
+    div[data-baseweb="popover"] div {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Force override any dark backgrounds */
+    .stSelectbox * {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Specific targeting for BaseWeb select dropdown */
+    div[data-baseweb="select"] div[data-baseweb="popover"] {
+        background-color: var(--primary-white) !important;
+    }
+    
+    div[data-baseweb="select"] div[data-baseweb="popover"] > div {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
     }
     
     /* File uploader - Enhanced contrast */
