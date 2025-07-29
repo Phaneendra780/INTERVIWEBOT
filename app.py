@@ -593,7 +593,7 @@ st.markdown("""
         :root {
             --primary-white: #FFFFFF;
             --secondary-white: #FAFAFA;
-            --text-primary: #1A1A1A;
+            --text-primary: #FFFFFF;
             --text-secondary: #404040;
         }
     }
