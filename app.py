@@ -28,33 +28,38 @@ st.set_page_config(
     page_icon="🎯"
 )
 
-# Custom CSS for white theme with perfect contrast
+# Custom CSS for white theme with perfect contrast - FIXED VERSION
 st.markdown("""
 <style>
     /* Import Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Root variables */
+    /* Root variables - Enhanced contrast */
     :root {
         --primary-white: #FFFFFF;
         --secondary-white: #FAFAFA;
         --light-gray: #F5F5F5;
-        --medium-gray: #E8E8E8;
-        --dark-gray: #333333;
+        --medium-gray: #E0E0E0;
+        --dark-gray: #2C2C2C;
         --text-primary: #1A1A1A;
-        --text-secondary: #4A4A4A;
-        --accent-blue: #2E5BFF;
-        --accent-green: #00B341;
-        --accent-orange: #FF6B35;
-        --border-color: #D1D1D1;
+        --text-secondary: #404040;
+        --text-light: #666666;
+        --accent-blue: #1E40AF;
+        --accent-blue-light: #3B82F6;
+        --accent-green: #059669;
+        --accent-orange: #EA580C;
+        --border-color: #D1D5DB;
+        --border-color-dark: #9CA3AF;
         --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
         --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+        --focus-ring: 0 0 0 3px rgba(30, 64, 175, 0.2);
     }
     
     /* Main app styling */
     .stApp {
         background-color: var(--primary-white);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--text-primary);
     }
     
     /* Hide Streamlit branding */
@@ -66,7 +71,7 @@ st.markdown("""
     .main-header {
         background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%);
         padding: 2rem 0;
-        border-bottom: 2px solid var(--medium-gray);
+        border-bottom: 2px solid var(--border-color);
         margin-bottom: 2rem;
         text-align: center;
     }
@@ -111,7 +116,7 @@ st.markdown("""
         margin-top: 0 !important;
     }
     
-    /* Text content */
+    /* Text content - Enhanced contrast */
     p, div, span, li {
         color: var(--text-primary) !important;
         line-height: 1.6 !important;
@@ -127,7 +132,7 @@ st.markdown("""
         box-shadow: var(--shadow-light);
     }
     
-    /* Info boxes */
+    /* Info boxes - Enhanced contrast */
     .stInfo {
         background-color: var(--secondary-white) !important;
         border: 1px solid var(--accent-blue) !important;
@@ -139,6 +144,11 @@ st.markdown("""
     
     .stInfo > div {
         color: var(--text-primary) !important;
+    }
+    
+    .stInfo div[data-testid="stMarkdownContainer"] p {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
     }
     
     /* Success boxes */
@@ -155,6 +165,11 @@ st.markdown("""
         color: var(--text-primary) !important;
     }
     
+    .stSuccess div[data-testid="stMarkdownContainer"] p {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
+    }
+    
     /* Error boxes */
     .stError {
         background-color: var(--secondary-white) !important;
@@ -169,7 +184,12 @@ st.markdown("""
         color: var(--text-primary) !important;
     }
     
-    /* Buttons */
+    .stError div[data-testid="stMarkdownContainer"] p {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Buttons - Enhanced contrast */
     .stButton > button {
         background-color: var(--accent-blue) !important;
         color: var(--primary-white) !important;
@@ -182,83 +202,140 @@ st.markdown("""
         box-shadow: var(--shadow-light) !important;
         text-transform: none !important;
         letter-spacing: 0.5px !important;
+        min-height: 3rem !important;
     }
     
     .stButton > button:hover {
-        background-color: #1E4BFF !important;
+        background-color: #1E3A8A !important;
         box-shadow: var(--shadow-medium) !important;
         transform: translateY(-2px) !important;
     }
     
+    .stButton > button:focus {
+        outline: none !important;
+        box-shadow: var(--focus-ring) !important;
+    }
+    
     .stButton > button:disabled {
         background-color: var(--medium-gray) !important;
-        color: var(--text-secondary) !important;
+        color: var(--text-light) !important;
         cursor: not-allowed !important;
         transform: none !important;
         box-shadow: none !important;
     }
     
-    /* Secondary buttons */
-    .stButton > button[kind="secondary"] {
-        background-color: var(--primary-white) !important;
-        color: var(--accent-blue) !important;
-        border: 2px solid var(--accent-blue) !important;
-    }
-    
-    .stButton > button[kind="secondary"]:hover {
-        background-color: var(--accent-blue) !important;
-        color: var(--primary-white) !important;
-    }
-    
-    /* Input fields */
+    /* Input fields - Enhanced contrast */
     .stTextInput > div > div > input {
         background-color: var(--primary-white) !important;
-        border: 2px solid var(--border-color) !important;
+        border: 2px solid var(--border-color-dark) !important;
         border-radius: 8px !important;
         color: var(--text-primary) !important;
         padding: 0.75rem !important;
         font-size: 1rem !important;
+        font-weight: 500 !important;
         transition: border-color 0.3s ease !important;
     }
     
     .stTextInput > div > div > input:focus {
         border-color: var(--accent-blue) !important;
-        box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1) !important;
+        box-shadow: var(--focus-ring) !important;
+        outline: none !important;
     }
     
-    /* Text areas */
+    .stTextInput > div > div > input::placeholder {
+        color: var(--text-light) !important;
+        opacity: 0.8 !important;
+    }
+    
+    /* Text areas - Enhanced contrast */
     .stTextArea > div > div > textarea {
         background-color: var(--primary-white) !important;
-        border: 2px solid var(--border-color) !important;
+        border: 2px solid var(--border-color-dark) !important;
         border-radius: 8px !important;
         color: var(--text-primary) !important;
         padding: 1rem !important;
         font-size: 1rem !important;
+        font-weight: 500 !important;
         line-height: 1.6 !important;
         transition: border-color 0.3s ease !important;
     }
     
     .stTextArea > div > div > textarea:focus {
         border-color: var(--accent-blue) !important;
-        box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1) !important;
+        box-shadow: var(--focus-ring) !important;
+        outline: none !important;
     }
     
-    /* Select boxes */
+    .stTextArea > div > div > textarea::placeholder {
+        color: var(--text-light) !important;
+        opacity: 0.8 !important;
+    }
+    
+    /* Select boxes - MAJOR FIX for dropdown contrast */
     .stSelectbox > div > div {
         background-color: var(--primary-white) !important;
-        border: 2px solid var(--border-color) !important;
+        border: 2px solid var(--border-color-dark) !important;
         border-radius: 8px !important;
+        min-height: 3rem !important;
     }
     
     .stSelectbox > div > div > div {
         color: var(--text-primary) !important;
         padding: 0.75rem !important;
+        font-weight: 500 !important;
     }
     
-    /* File uploader */
+    /* Dropdown menu items - CRITICAL FIX */
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-color-dark) !important;
+    }
+    
+    /* Dropdown options list */
+    .stSelectbox ul {
+        background-color: var(--primary-white) !important;
+        border: 2px solid var(--border-color-dark) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-medium) !important;
+        max-height: 200px !important;
+        overflow-y: auto !important;
+    }
+    
+    .stSelectbox li {
+        background-color: var(--primary-white) !important;
+        color: var(--text-primary) !important;
+        padding: 0.75rem 1rem !important;
+        font-weight: 500 !important;
+        border-bottom: 1px solid var(--light-gray) !important;
+        cursor: pointer !important;
+    }
+    
+    .stSelectbox li:hover {
+        background-color: var(--light-gray) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .stSelectbox li:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Selected option in dropdown */
+    .stSelectbox div[aria-selected="true"] {
+        background-color: var(--accent-blue) !important;
+        color: var(--primary-white) !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Dropdown arrow */
+    .stSelectbox svg {
+        fill: var(--text-primary) !important;
+    }
+    
+    /* File uploader - Enhanced contrast */
     .stFileUploader > div {
         background-color: var(--secondary-white) !important;
-        border: 2px dashed var(--border-color) !important;
+        border: 2px dashed var(--border-color-dark) !important;
         border-radius: 12px !important;
         padding: 2rem !important;
         text-align: center !important;
@@ -272,35 +349,48 @@ st.markdown("""
     
     .stFileUploader > div > div {
         color: var(--text-primary) !important;
+        font-weight: 500 !important;
     }
     
-    /* Progress bar */
+    /* Progress bar - Enhanced visibility */
     .stProgress > div > div > div {
         background-color: var(--accent-blue) !important;
         border-radius: 10px !important;
     }
     
     .stProgress > div > div {
-        background-color: var(--light-gray) !important;
+        background-color: var(--medium-gray) !important;
         border-radius: 10px !important;
+        border: 1px solid var(--border-color) !important;
     }
     
-    /* Expanders */
+    /* Expanders - Enhanced contrast */
     .streamlit-expanderHeader {
         background-color: var(--secondary-white) !important;
-        border: 1px solid var(--border-color) !important;
+        border: 2px solid var(--border-color-dark) !important;
         border-radius: 8px 8px 0 0 !important;
         color: var(--text-primary) !important;
         font-weight: 600 !important;
         padding: 1rem !important;
+        cursor: pointer !important;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        background-color: var(--light-gray) !important;
+        border-color: var(--accent-blue) !important;
     }
     
     .streamlit-expanderContent {
         background-color: var(--primary-white) !important;
-        border: 1px solid var(--border-color) !important;
+        border: 2px solid var(--border-color-dark) !important;
         border-top: none !important;
         border-radius: 0 0 8px 8px !important;
         padding: 1.5rem !important;
+    }
+    
+    /* Expander arrow */
+    .streamlit-expanderHeader svg {
+        fill: var(--text-primary) !important;
     }
     
     /* Columns */
@@ -310,7 +400,7 @@ st.markdown("""
         padding: 1rem;
         margin: 0.5rem;
         box-shadow: var(--shadow-light);
-        border: 1px solid var(--medium-gray);
+        border: 1px solid var(--border-color);
     }
     
     /* Spinner */
@@ -318,7 +408,7 @@ st.markdown("""
         border-top-color: var(--accent-blue) !important;
     }
     
-    /* Labels */
+    /* Labels - Enhanced contrast */
     .stTextInput > label,
     .stTextArea > label,
     .stSelectbox > label,
@@ -363,6 +453,7 @@ st.markdown("""
         padding: 0.5rem 1.5rem;
         color: var(--accent-blue) !important;
         font-weight: 600;
+        font-size: 1rem;
         text-align: center;
         margin-bottom: 1rem;
         display: inline-block;
@@ -410,10 +501,11 @@ st.markdown("""
         margin-top: 0.5rem !important;
     }
     
-    /* Enhanced accessibility */
-    *:focus {
+    /* Enhanced accessibility - Improved focus indicators */
+    *:focus-visible {
         outline: 3px solid var(--accent-blue) !important;
         outline-offset: 2px !important;
+        border-radius: 4px !important;
     }
     
     /* High contrast text */
@@ -426,8 +518,53 @@ st.markdown("""
     hr {
         border: none !important;
         height: 2px !important;
-        background: linear-gradient(90deg, transparent, var(--border-color), transparent) !important;
+        background: linear-gradient(90deg, transparent, var(--border-color-dark), transparent) !important;
         margin: 2rem 0 !important;
+    }
+    
+    /* Subheader styling */
+    .stSubheader {
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Markdown content in containers */
+    .stMarkdown p {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Textarea disabled state */
+    .stTextArea textarea:disabled {
+        background-color: var(--light-gray) !important;
+        color: var(--text-secondary) !important;
+        opacity: 0.8 !important;
+    }
+    
+    /* Loading states */
+    .stSpinner {
+        color: var(--accent-blue) !important;
+    }
+    
+    /* Warning boxes */
+    .stWarning {
+        background-color: var(--secondary-white) !important;
+        border: 1px solid var(--accent-orange) !important;
+        border-left: 4px solid var(--accent-orange) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+        box-shadow: var(--shadow-light) !important;
+    }
+    
+    .stWarning > div {
+        color: var(--text-primary) !important;
+    }
+    
+    .stWarning div[data-testid="stMarkdownContainer"] p {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
     }
     
     /* Responsive design */
@@ -444,6 +581,41 @@ st.markdown("""
             margin: 0.25rem;
             padding: 0.75rem;
         }
+        
+        .stButton > button {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+    }
+    
+    /* Dark mode compatibility (if needed) */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --primary-white: #FFFFFF;
+            --secondary-white: #FAFAFA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #404040;
+        }
+    }
+    
+    /* Ensure all text is readable */
+    div, p, span, label, input, textarea, select, button {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Override any Streamlit defaults that might interfere */
+    .stApp div[data-testid="stMarkdownContainer"] * {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Fix for selectbox placeholder */
+    .stSelectbox div[data-baseweb="select"] div[role="combobox"] {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Fix for selectbox icon */
+    .stSelectbox div[data-baseweb="select"] svg {
+        fill: var(--text-primary) !important;
     }
 </style>
 """, unsafe_allow_html=True)
